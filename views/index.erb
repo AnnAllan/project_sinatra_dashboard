@@ -2,36 +2,45 @@
   <button type="submit" autofocus>Create New Search</button>
 </form>
 
-<table>
-  <caption>Job Openings</caption>
-  <tr>
-    <th>Category</th>
-    <th>Information</th>
-  </tr>
-  <% session["list"].each do |ad| %>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <caption>Job Openings</caption>
     <tr>
-      <td>Title</td>
-      <td><%= ad[0] %></td>
+      <th>Category</th>
+      <th>Information</th>
     </tr>
-    <tr>
-      <td>Company</td>
-      <td><%= ad[1] %></td>
-    </tr>
-    <tr>
-      <td>Link</td>
-      <td><%= ad[2] %></td>
-    </tr>
-    <tr>
-      <td>Posted on</td>
-      <td><%= ad[3] %></td>
-    </tr>
-    <tr>
-      <td>Job ID</td>
-      <td><%= ad[4] %></td>
-    </tr>
-    <tr>
-      <td>Location</td>
-      <td><%= ad[6] %></td>
-    </tr>
-    <% end %>
+    <tbody>
+    <% session["list"].each do |ad| %>
+      <tr>
+        <td>Title</td>
+        <td><%= ad[0] %></td>
+      </tr>
+      <tr>
+        <td>Company</td>
+        <td><%= ad[1] %></td>
+      </tr>
+      <tr>
+        <td>Link</td>
+        <td><%= ad[2] %></td>
+      </tr>
+      <tr>
+        <td>Posted on</td>
+        <td><%= ad[3] %></td>
+      </tr>
+      <tr>
+        <td>Job ID</td>
+        <td><%= ad[4] %></td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td><%= ad[6] %></td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
+</div
