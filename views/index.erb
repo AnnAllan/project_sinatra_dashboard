@@ -1,0 +1,12 @@
+<form action="/new_search" method="post">
+  <btn type="submit" value="Create New Search"></btn>
+</form>
+
+<% session["list"].each do |ad| %>
+  <h1>Title: <%= ad[0] %></h1>
+  <h2>Company: <%= ad[1] %></h2>
+  <h3>Link: <%= ad[2] %></h3>
+  <h3>Posted on: <%= ad[3] %></h3>
+  <h3>Job ID: <%= ad[4] %></h3>
+  <h3>Location: <%= ad[6] %></h3>
+<% end %>
