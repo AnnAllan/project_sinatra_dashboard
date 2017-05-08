@@ -1,6 +1,7 @@
 <form action="/new_search" method="post">
-  <btn type="submit" value="Create New Search"></btn>
+  <button type="submit" autofocus>Create New Search</button>
 </form>
+
 
 <% session["list"].each do |ad| %>
   <h1>Title: <%= ad[0] %></h1>

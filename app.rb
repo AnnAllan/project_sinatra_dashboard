@@ -29,3 +29,7 @@ get '/' do
     end
   erb :index
 end
+
+post '/new_search' do
+  erb :search_form
+end
