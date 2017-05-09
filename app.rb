@@ -4,6 +4,8 @@ require 'rubygems'
 require 'bundler/setup'
 require 'mechanize'
 require 'csv'
+require 'pp'
+require 'httparty'
 
 def posted_on(date_text)
   word_arr = date_text.split(" ")
@@ -22,7 +24,6 @@ end
 
 def new_search_link(keyword_string="javascript", loc="Chattanooga, TN")
   loc_format = loc.split(", ")
-
   return "https://www.dice.com/jobs/advancedResult.html?for_one=#{keyword_string}&for_all=&for_exact=&for_none=&for_jt=junior&for_com=&for_loc=#{loc_format[0]}%2C+#{loc_format[1]}&sort=relevance&limit=100&radius=20"
 end
 
@@ -53,4 +54,34 @@ post '/search_keyword' do
     session["list"] << [(ad.at_css(".serp-result-content h3 a")['title']), ( ad.at_css(".employer span[2]")['title']), (ad.at_css(".serp-result-content h3 a")['href']), (posted_on(ad.at_css(".posted").text)), (ad.at_css(".serp-result-content input")['id']), (ad.at_css(".serp-result-content h3 a")['value']), (ad.at_css(".location")['title'])]
     end
   erb :index
+end
+
+post '/use_loc' do
+  add = request.ip
+  home = "pipkin.home.dyndns.org"
+  if Sinatra::Base.development?
+    add = home
+  end
+  session["agent"] = Mechanize.new {|a| a.user_agent_alias = 'Windows Chrome'}
+  session["agent"].history_added = Proc.new {sleep 0.5}
+  session["address"] = Locator.city(add)
+  page = session["agent"].get(new_search_link("programming", session["address"]))
+  session["list"] = nil
+  session["list"] = []
+  page.parser.css(".complete-serp-result-div").each do |ad|
+    session["list"] << [(ad.at_css(".serp-result-content h3 a")['title']), ( ad.at_css(".employer span[2]")['title']), (ad.at_css(".serp-result-content h3 a")['href']), (posted_on(ad.at_css(".posted").text)), (ad.at_css(".serp-result-content input")['id']), (ad.at_css(".serp-result-content h3 a")['value']), (ad.at_css(".location")['title'])]
+    end
+  erb :index
+
+end
+
+class Locator
+  include HTTParty
+  BASE_URI = "freegeoip.net/json/"
+
+  def self.city(add)
+    @response = HTTParty.get("http://freegeoip.net/json/#{add}")
+    @location =  JSON.parse(@response.body)
+    return "#{@location["city"]}, #{@location["region_code"]}"
+  end
 end

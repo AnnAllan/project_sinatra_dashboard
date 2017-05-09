@@ -5,3 +5,4 @@ gem 'pry-byebug'
 gem "httparty"
 gem 'mechanize'
 gem "thin"
+gem 'json'
