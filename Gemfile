@@ -6,3 +6,4 @@ gem "httparty"
 gem 'mechanize'
 gem "thin"
 gem 'json'
+gem 'envyable'

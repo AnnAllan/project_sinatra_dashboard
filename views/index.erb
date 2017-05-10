@@ -9,11 +9,13 @@
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
     <caption>Job Openings</caption>
+    <caption>
+      <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+    </caption>
     <tr>
       <th>Category</th>
       <th>Information</th>
     </tr>
-    <tbody>
     <% session["list"].each do |ad| %>
       <tr>
         <td>Title</td>
@@ -40,11 +42,54 @@
         <td><%= ad[6] %></td>
       </tr>
       <tr>
+        <td>Glassdoor ID</td>
+        <td><%= ad[7] %></td>
+      </tr>
+      <tr>
+        <td>Overall Rating</td>
+        <td><%= ad[8] %></td>
+      </tr>
+      <tr>
+        <td>Rating Description</td>
+        <td><%= ad[9] %></td>
+      </tr>
+      <tr>
+        <td>Culture and Values</td>
+        <td><%= ad[10] %></td>
+      </tr>
+      <tr>
+        <td>Senior Leadership</td>
+        <td><%= ad[11] %></td>
+      </tr>
+      <tr>
+        <td>Compensation and Benefits</td>
+        <td><%= ad[12] %></td>
+      </tr>
+      <tr>
+        <td>Career Opportunity</td>
+        <td><%= ad[13] %></td>
+      </tr>
+      <tr>
+        <td>Work Life Balance</td>
+        <td><%= ad[14] %></td>
+      </tr>
+      <tr>
+        <td>Featured Headline</td>
+        <td><%= ad[15] %></td>
+      </tr>
+      <tr>
+        <td>Featured Pros</td>
+        <td><%= ad[16] %></td>
+      </tr>
+      <tr>
+        <td>Featured Cons</td>
+        <td><%= ad[17] %></td>
+      </tr>
+      <tr>
         <td>
           &nbsp;
         </td>
       </tr>
-      <% end %>
-    </tbody>
+    <% end %>
   </table>
 </div
